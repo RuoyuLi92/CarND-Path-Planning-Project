@@ -99,12 +99,22 @@ int main() {
            */
 		  // move the car with constant speed
 		  // the car moves from "point" to "point", each 1 second we generate 50 points for
-		  // the vehicle to traverse, this 0.5 has unit 0.5[m/step] 50 has unit 50[step/second]
+		  // the vehicle to traverse, this 0.5 has unit 0.5[m/step] 50 has unit 50[steps/second]
+		  // this 50 [steps/second] also called a 50 pack planner
 		  double dist_inc = 0.5;
 		  for(int i = 0; i < 50; i++) {
-			next_x_vals.push_back(car_x+(dist_inc*i)*cos(deg2rad(car_yaw)));
-			next_y_vals.push_back(car_y+(dist_inc*i)*sin(deg2rad(car_yaw)));
-			std::cout << car_yaw;
+			  double next_s = car_s + (i + 1) * dist_inc;
+			  // the waypoints are set on the yellow line, and car is located 1.5 lanes from middle
+			  // each lane is 4 meters wide
+			  double next_d = 6; 
+			  vector<double> vec_xy = getXY(next_s, next_d, map_waypoints_s, 
+                     map_waypoints_x, 
+                     map_waypoints_y)
+			  //next_x_vals.push_back(car_x+(dist_inc*i)*cos(deg2rad(car_yaw)));
+			  next_x_vals.push_back(vec_xy(0));
+			  //next_y_vals.push_back(car_y+(dist_inc*i)*sin(deg2rad(car_yaw)));
+			  next_y_vals.push_back(vec_xy(1));
+			//std::cout << car_yaw;
 		  }
 		  
 		  // end
