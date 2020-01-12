@@ -97,8 +97,16 @@ int main() {
            * TODO: define a path made up of (x,y) points that the car will visit
            *   sequentially every .02 seconds
            */
-
-
+		  // move the car with constant speed
+		  // the car moves from "point" to "point", each 1 second we generate 50 points for
+		  // the vehicle to traverse, this 0.5 has unit 0.5[m/step] 50 has unit 50[step/second]
+		  double dist_inc = 0.5;
+		  for(int i = 0; i < 50; i++) {
+			next_x_vals.push_back(car_x+(dist_inc*i)*cos(deg2rad(car_yaw)));
+			next_y_vals.push_back(car_y+(dist_inc*i)*sin(deg2rad(car_yaw)));
+		  }
+		  
+		  // end
           msgJson["next_x"] = next_x_vals;
           msgJson["next_y"] = next_y_vals;
 
