@@ -52,7 +52,7 @@ int main() {
   }
   
   // the vehicle start in the middle lane
-  int lane = 1;
+  int lane = 4;
   
   // Have a reference velocity to target
   double ref_vel = 49.5; //mph
