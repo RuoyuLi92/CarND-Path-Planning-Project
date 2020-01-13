@@ -52,7 +52,7 @@ int main() {
   }
   
   // the vehicle start in the middle lane
-  int lane = 4;
+  int lane = 1;
   
   // Have a reference velocity to target
   double ref_vel = 49.5; //mph
@@ -98,7 +98,7 @@ int main() {
 		  int prev_size = previous_path_x.size();
 		  
 		  // Create a list of widley spaced (x,y) waypoints, evenly spaced at 30m
-		  // Later we will interpolate tehse waypoints with a splin, and fill it
+		  // Later we will interpolate tehse waypoints with a spline, and fill it
 		  // with more points that control speed
 		  
 		  vector<double>ptsx;
@@ -168,7 +168,7 @@ int main() {
 			  double shift_y = ptsy[i] - ref_y;
 			  
 			  ptsx[i] = (shift_x * cos(0-ref_yaw) - shift_y * sin(0-ref_yaw));
-			  ptsy[i] = (shift_x * sin(0-ref_yaw) - shift_y * cos(0-ref_yaw));
+			  ptsy[i] = (shift_x * sin(0-ref_yaw) + shift_y * cos(0-ref_yaw));
 		  
 		  }
 		  
@@ -215,7 +215,7 @@ int main() {
 			  
 			  // We are now in local coordinate, so we transform back to world coordinate 
 			  x_point = (x_ref*cos(ref_yaw) - y_ref*sin(ref_yaw));
-			  y_point = (x_ref*sin(ref_yaw) - y_ref*cos(ref_yaw));
+			  y_point = (x_ref*sin(ref_yaw) + y_ref*cos(ref_yaw));
 			  
 			  x_point += ref_x;
 			  y_point += ref_y;
