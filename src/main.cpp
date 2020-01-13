@@ -102,7 +102,7 @@ int main() {
 			  car_s = end_path_s;
 		  }
 		  
-		  bool too_cloase = false;
+		  bool too_close = false;
 		  
 		  // Find rev_v to use
 		  for(int i = 0; i < sensor_fusion.size(); ++i) {
