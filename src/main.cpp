@@ -131,6 +131,11 @@ int main() {
 					  // Could also flag to change lanes.
 					  //ref_vel = 29.5; //mph
 					  too_close = true;
+					  
+					  // start from blindly turning left when the front vehicle is too slow and we are not at left lane
+					  if(lane > 0) {
+						  lane = 0;
+					  }
 				  }
 			  }
 		  }
