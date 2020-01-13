@@ -123,7 +123,7 @@ int main() {
 				  // last planned trajectory
 				  
 				  // check s value greater than mine and s gap, 
-				  if((check_car_s > car_s) && (check_car_s - car_s) < 30)) {
+				  if((check_car_s > car_s) && ((check_car_s - car_s) < 30)) {
 					  
 					  
 					  
