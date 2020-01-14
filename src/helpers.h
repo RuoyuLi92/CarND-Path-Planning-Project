@@ -5,9 +5,12 @@
 #include <string>
 #include <vector>
 
+#include "json.hpp"
+
 // for convenience
 using std::string;
 using std::vector;
+using nlohmann::json;
 
 // Checks if the SocketIO event has JSON data.
 // If there is data the JSON object in string format will be returned,
@@ -156,6 +159,7 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s,
 
 typedef nlohmann::basic_json<std::map, std::vector,
       std::basic_string<char>, bool, long long, unsigned long long, double, std::allocator, nlohmann::adl_serializer> datatype;
+	  
 bool safeLaneChange(int lane, datatype sensor_fusion, double car_s, int prev_size)
 {
 
