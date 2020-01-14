@@ -132,7 +132,7 @@ int main() {
 					  // Could also flag to change lanes.
 					  //ref_vel = 29.5; //mph
 					  too_close = true;
-					  if(lane == 0) 
+					  /*if(lane == 0) 
 						{
 						  if(safeLaneChange(1, sensor_fusion, car_s, prev_size)) 
 							{
@@ -158,12 +158,15 @@ int main() {
 							}
 						}
 					  //laneFlag = !laneFlag;
-					  
+					  */ 
 					  // start from blindly turning left when the front vehicle is too slow and we are not at left lane
-					  //if(lane > 0) {
+					  if(lane > 0) {
 						  //lane = 0;
-					  //}
+					  }
+					 
 				    }
+					
+					
 			  }
 		  }
 		  
