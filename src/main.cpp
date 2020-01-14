@@ -56,8 +56,11 @@ int main() {
   
   // Have a reference velocity to target
   double ref_vel = 0.0; //mph
-
-  h.onMessage([&ref_vel, &map_waypoints_x,&map_waypoints_y,&map_waypoints_s,
+  
+  //Flag to switch lanes
+  bool laneFlag = true;
+  
+  h.onMessage([&laneFlag, &ref_vel, &map_waypoints_x,&map_waypoints_y,&map_waypoints_s,
                &map_waypoints_dx,&map_waypoints_dy, &lane]
               (uWS::WebSocket<uWS::SERVER> ws, char *data, size_t length,
                uWS::OpCode opCode) {
@@ -131,11 +134,35 @@ int main() {
 					  // Could also flag to change lanes.
 					  //ref_vel = 29.5; //mph
 					  too_close = true;
+					  if(lane == 0) {
+					  
+						  if(safeLaneChange(1, sensor_fusion, car_s, prev_size)) {
+							  lane = 1;
+							  }
+				        }
+					  else if(lane == 1) {
+						  if(laneFlag) {
+							  if(safeLaneChange(0, sensor_fusion, car_s, prev_size)) {
+								  lane = 0;
+								}
+							}
+						  else { 
+								if(safeLaneChange(2, sensor_fusion, car_s, prev_size)) {
+									lane = 2;
+							    }
+						    }
+						}
+					  else {
+							if(safeLaneChange(1, sensor_fusion, car_s, prev_size)) {
+									lane = 1;
+								}
+							}
+					  laneFlag = !laneFlag;
 					  
 					  // start from blindly turning left when the front vehicle is too slow and we are not at left lane
-					  if(lane > 0) {
-						  lane = 0;
-					  }
+					  //if(lane > 0) {
+						  //lane = 0;
+					  //}
 				  }
 			  }
 		  }
@@ -150,7 +177,9 @@ int main() {
 					  
 				  
 				  
-				  
+		  /* This following part is the actually trajectory generation part
+		  
+		  */		  
 		  // Create a list of widley spaced (x,y) waypoints, evenly spaced at 30m
 		  // Later we will interpolate tehse waypoints with a spline, and fill it
 		  // with more points that control speed
@@ -165,7 +194,7 @@ int main() {
 		  double ref_y = car_y;
 		  double ref_yaw = deg2rad(car_yaw);
 		  
-		  // if previous size is almost empty, use the car as starting reference
+		  // if previous size is all consumed,i.e. all planned points have been traversed then use the car as starting reference
 		  
 		  if(prev_size < 2) {
 			  

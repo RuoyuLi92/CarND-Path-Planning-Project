@@ -154,4 +154,31 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s,
   return {x,y};
 }
 
+bool safeLaneChange(int lane, auto sensor_fusion, double car_s, int prev_size)
+{
+
+  //auto sensor_fusion = (auto) sensor_fusion2;
+  for(int i = 0; i < sensor_fusion.size(); i++)
+  {
+    // check lanes of nearby cars
+    float d = sensor_fusion[i][6];
+
+    // if there is a car ahead of us
+    if(d < (2+4*lane+2) && d > (2+4*lane-2))
+    {
+      double vx = sensor_fusion[i][3];
+      double vy = sensor_fusion[i][4];
+      double check_speed = sqrt(vx*vx + vy*vy);
+      double check_car_s = sensor_fusion[i][5];
+
+      check_car_s += (double)prev_size*0.02*check_speed;
+
+      // check if the car is within 30 meters from our car
+      if( (car_s - check_car_s) < 5 && ((check_car_s - car_s) < 30))
+        return false;
+    }
+  }
+    return true;
+}
+
 #endif  // HELPERS_H
