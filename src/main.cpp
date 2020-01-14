@@ -396,7 +396,8 @@ int main() {
 
 void testTypeDef(datatype sensor_fusion)
 {
-	for(int i = 0; i< snesor_fusion.size(); ++i) {
+	for(int i = 0; i< sensor_fusion.size(); ++i) {
 		float d = sensor_fusion[i][6]; 
 		std::cout<<d<<std::endl;
+	}
 }
