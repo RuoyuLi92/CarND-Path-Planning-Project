@@ -7,7 +7,7 @@
 #include "Eigen-3.3/Eigen/QR"
 #include "helpers.h"
 #include "spline.h"
-#include "json.hpp"
+
 
 // for convenience
 using nlohmann::json;
@@ -126,44 +126,44 @@ int main() {
 				  // last planned trajectory
 				  
 				  // check s value greater than mine and s gap, 
-				  if((check_car_s > car_s) && ((check_car_s - car_s) < 30)) {
-					  
-					  
-					  
+				  if((check_car_s > car_s) && ((check_car_s - car_s) < 30)) 
+					{
 					  // Do some thing here, lower ref_vel will be set so we dont crash into the car infront of us
 					  // Could also flag to change lanes.
 					  //ref_vel = 29.5; //mph
 					  too_close = true;
-					  if(lane == 0) {
-					  
-						  if(safeLaneChange(1, sensor_fusion, car_s, prev_size)) {
+					  if(lane == 0) 
+						{
+						  if(safeLaneChange(1, sensor_fusion, car_s, prev_size)) 
+							{
 							  lane = 1;
-							  }
+							}
 				        }
-					  else if(lane == 1) {
-						  if(laneFlag) {
-							  if(safeLaneChange(0, sensor_fusion, car_s, prev_size)) {
-								  lane = 0;
-								}
+					  else if(lane == 1) 
+						{
+						  if(safeLaneChange(0, sensor_fusion, car_s, prev_size)) 
+							{
+							  lane = 0;
 							}
-						  else { 
-								if(safeLaneChange(2, sensor_fusion, car_s, prev_size)) {
-									lane = 2;
-							    }
-						    }
+						  else if(safeLaneChange(2, sensor_fusion, car_s, prev_size)) 
+							{
+							  lane = 2;
+							}
 						}
-					  else {
-							if(safeLaneChange(1, sensor_fusion, car_s, prev_size)) {
-									lane = 1;
-								}
+					  else 
+						{
+						  if(safeLaneChange(1, sensor_fusion, car_s, prev_size)) 
+							{
+							  lane = 1;
 							}
-					  laneFlag = !laneFlag;
+						}
+					  //laneFlag = !laneFlag;
 					  
 					  // start from blindly turning left when the front vehicle is too slow and we are not at left lane
 					  //if(lane > 0) {
 						  //lane = 0;
 					  //}
-				  }
+				    }
 			  }
 		  }
 		  
