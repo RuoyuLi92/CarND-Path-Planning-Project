@@ -160,8 +160,21 @@ int main() {
 					  //laneFlag = !laneFlag;
 					  */ 
 					  // start from blindly turning left when the front vehicle is too slow and we are not at left lane
-					  if(lane > 0) {
+					  if(lane == 0) {
 						  //lane = 0;
+						  lane = 1;
+					  }
+					  else if(lane == 1) {
+						  double random = rand()%100/(double)101;
+						  if (random > 0.5) {
+							  lane = 2;
+						  }
+						  else {
+							  lane = 1;
+						  }
+					  }
+					  else {
+						  lane = 1;
 					  }
 					 
 				    }
