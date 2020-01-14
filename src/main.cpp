@@ -17,11 +17,7 @@ using std::vector;
 typedef nlohmann::basic_json<std::map, std::vector,
       std::basic_string<char>, bool, long long, unsigned long long, double, std::allocator, nlohmann::adl_serializer> datatype;
 
-void testTypeDef(datatype sensor_fusion){
-	for(int i = 0; i< snesor_fusion.size(); ++i) {
-		float d = sensor_fusion[i][6]; 
-		std::cout<<d<<std::endl;
-}
+void testTypeDef(datatype sensor_fusion);
 
 int main() {
   uWS::Hub h;
@@ -106,7 +102,7 @@ int main() {
           // Sensor Fusion Data, a list of all other cars on the same side 
           //   of the road.
           auto sensor_fusion = j[1]["sensor_fusion"];
-		  testTypeDef(sensro_fusion);
+		  testTypeDef(sensor_fusion);
 		  
 		  int prev_size = previous_path_x.size();
 		  
@@ -396,4 +392,11 @@ int main() {
   }
   
   h.run();
+}
+
+void testTypeDef(datatype sensor_fusion)
+{
+	for(int i = 0; i< snesor_fusion.size(); ++i) {
+		float d = sensor_fusion[i][6]; 
+		std::cout<<d<<std::endl;
 }
