@@ -154,7 +154,9 @@ vector<double> getXY(double s, double d, const vector<double> &maps_s,
   return {x,y};
 }
 
-bool safeLaneChange(int lane, auto sensor_fusion, double car_s, int prev_size)
+typedef nlohmann::basic_json<std::map, std::vector,
+      std::basic_string<char>, bool, long long, unsigned long long, double, std::allocator, nlohmann::adl_serializer> datatype;
+bool safeLaneChange(int lane, datatype sensor_fusion, double car_s, int prev_size)
 {
 
   //auto sensor_fusion = (auto) sensor_fusion2;
