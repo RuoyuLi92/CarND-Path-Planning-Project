@@ -136,7 +136,7 @@ int main() {
 					{
 					  // Do some thing here, lower ref_vel will be set so we dont crash into the car infront of us
 					  // Could also flag to change lanes.
-					  //ref_vel = 29.5; //mph
+					  ref_vel = 29.5; //mph
 					  too_close = true;
 					  /*if(lane == 0) 
 						{
